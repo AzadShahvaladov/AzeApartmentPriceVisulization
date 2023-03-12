@@ -1,0 +1,41 @@
+import pandas as pd
+
+class DataPrepear:
+    def __init__(self, df):
+        shape_range = []
+        for item in df["Shape"]:
+            if item < 20:
+                shape_range.append("0-20")
+            elif item < 40:
+                shape_range.append("20-40")
+            elif item < 60:
+                shape_range.append("40-60")
+            elif item < 80:
+                shape_range.append("60-80")
+            elif item < 100:
+                shape_range.append("80-100")
+            elif item < 120:
+                shape_range.append("100-120")
+            elif item < 140:
+                shape_range.append("120-140")
+            elif item < 160:
+                shape_range.append("140-160")
+            elif item < 180:
+                shape_range.append("160-180")
+            elif item < 200:
+                shape_range.append("180-200")
+            elif item < 300:
+                shape_range.append("200-300")
+            elif item < 400:
+                shape_range.append("300-400")
+            elif item < 500:
+                shape_range.append("400-500")
+            else:
+                shape_range.append("500>")
+
+        df["shape_range"] = shape_range
+
+        index_for_delete = df[df["Location"] == "Bakı"].index
+        df.drop(index_for_delete, inplace=True)
+        replace_elements = {"Yasamal q.": "Yasamal r.", "Binəqədi q.": "Binəqədi r.", "Ağ şəhər ": "Ağ şəhər q.", "Sabunçu q.": "Sabunçu r."}
+        df.replace(to_replace=replace_elements, inplace=True)
